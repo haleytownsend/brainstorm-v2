@@ -1,0 +1,27 @@
+
+.row {
+  background-color: #2ec4b6;
+  height: auto
+}
+
+.row-one{
+  background-color: #ffffff
+}
+
+.well{
+  background-color: #f2f2f2;
+  height: auto
+}
+
+.row-four {
+  background-color: #011627;
+  height: auto
+}
+
+h1, h3, p {
+  text-align: center
+}
+
+textarea {
+  padding: 10px;
+}

@@ -1,0 +1,24 @@
+{
+  "name": "brainstorm",
+  "version": "1.0.0",
+  "description": "The Brain Storm app",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "serve": "http-server ./public",
+    "test": "mocha --recursive"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chart.js": "^2.7.1",
+    "got": "^7.1.0",
+    "morgan": "^1.9.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "http-server": "^0.10.0",
+    "mocha": "^4.0.1"
+  }
+}
