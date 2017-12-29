@@ -1,37 +1,33 @@
-const express = require('express');
+const express = require('express')
 
-const PORT = process.env.PORT || 8080;
-const app = express();
+const PORT = process.env.PORT || 8080
+const app = express()
 
-let server;
+let server
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
-function runServer() {
-  console.log('running run');
-  return new Promise((resolve, reject) => {
-    server = app.listen(PORT, () => {
-      console.log(`Listening on ${PORT}`)
-      resolve(server)
-    })
-    server.on('error', reject);
-  });
+const runServer = () => {
+  if (server && server.listening) return
+
+  return new Promise((res, rej) => {
+    server = app.listen(PORT, () => res(server))
+    server.on('error', rej)
+  })
 }
 
-function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log('Closing server');
-       server.close(err => {
-           if (err) {
-               return reject(err);
-           }
-           resolve();
-      });
-  });
+const closeServer = () => {
+  return new Promise((res, rej) => {
+    server.close(err => {
+      if (err) return rej(err)
+
+      res()
+    })
+  })
 }
 
 if (require.main === module) {
-  runServer().catch(console.error(err));
-};
+  runServer().catch(console.error.bind(console))
+}
 
-module.exports = { app, runServer, closeServer };
+module.exports = { app, runServer, closeServer }
