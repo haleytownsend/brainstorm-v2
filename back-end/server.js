@@ -1,37 +1,44 @@
-const express = require('express');
+const express = require('express')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
-const PORT = process.env.PORT || 8080;
-const app = express();
+mongoose.Promise = Promise
+mongoose.connect('mongodb://localhost/brainstorm')
+mongoose.connection.on('error', console.error.bind(console, 'Connection error:'))
+mongoose.connection.once('open', () => console.log('MongoDB connected'))
 
-let server;
+const PORT = process.env.PORT || 8080
+const app = express()
 
-app.use(express.static('public'));
+let server
 
-function runServer() {
-  console.log('running run');
-  return new Promise((resolve, reject) => {
-    server = app.listen(PORT, () => {
-      console.log(`Listening on ${PORT}`)
-      resolve(server)
-    })
-    server.on('error', reject);
-  });
+app.use(bodyParser.json())
+app.use('/migraines', require('./routes/migraines'))
+app.use(express.static('public'))
+
+app.get('/', (req, res) => res.end('Up and running'))
+
+const runServer = () => {
+  if (server && server.listening) return
+
+  return new Promise((res, rej) => {
+    server = app.listen(PORT, () => res(server))
+    server.on('error', rej)
+  })
 }
 
-function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log('Closing server');
-       server.close(err => {
-           if (err) {
-               return reject(err);
-           }
-           resolve();
-      });
-  });
+const closeServer = () => {
+  return new Promise((res, rej) => {
+    server.close(err => {
+      if (err) return rej(err)
+
+      res()
+    })
+  })
 }
 
 if (require.main === module) {
-  runServer().catch(console.error(err));
-};
+  runServer().catch(console.error.bind(console))
+}
 
-module.exports = { app, runServer, closeServer };
+module.exports = { app, runServer, closeServer }
