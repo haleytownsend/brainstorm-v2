@@ -1,9 +1,12 @@
-const express = require('express')
 const bodyParser = require('body-parser')
+const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path')
+
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 mongoose.Promise = Promise
-mongoose.connect('mongodb://localhost/brainstorm')
+mongoose.connect(process.env.DATABASE_URL)
 mongoose.connection.on('error', console.error.bind(console, 'Connection error:'))
 mongoose.connection.once('open', () => console.log('MongoDB connected'))
 
