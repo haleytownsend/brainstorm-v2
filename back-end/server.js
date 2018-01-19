@@ -17,9 +17,7 @@ let server
 
 app.use(bodyParser.json())
 app.use('/migraines', require('./routes/migraines'))
-app.use(express.static('public'))
-
-app.get('/', (req, res) => res.end('Up and running'))
+app.use(express.static(path.resolve(__dirname, '../front-end')))
 
 const runServer = () => {
   if (server && server.listening) return
