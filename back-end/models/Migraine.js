@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
-  createdAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now, required: true },
   intensity: { type: Number, required: true },
   water: { type: Number, required: true },
   triggers: [ String ],
