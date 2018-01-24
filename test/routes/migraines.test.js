@@ -40,7 +40,7 @@ describe('Migraines router', () => {
         .post('/migraines')
         .send(newMigraine)
         .then(function(res) {
-          expect(res).to.have.status(200)
+          expect(res).to.have.status(201)
           expect(res.body).to.be.an('object')
           expect(res.body.id).to.not.equal(null)
         })
@@ -108,4 +108,4 @@ describe('Migraines router', () => {
       });
     });
 
-  });
+  })
