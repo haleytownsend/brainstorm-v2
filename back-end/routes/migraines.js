@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
     ;['intensity', 'water'].forEach(field => {
       if (!(field in req.body)) {
         throw `\`${field}\` is not in request body`
+        res.status(400).json({ error: true, message }).end()
       }
     })
 
@@ -40,12 +41,46 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.put('/:migraine-id', (req, res) => {
-  res.send('TODO: implement migraine update')
+
+router.put('/:id', (req, res) => {
+  if (!(req.params['id'] && req.body['id'] && req.params['id'] === req.body['id'])) {
+    res.status(400).json({
+      error: 'Request path id and request body id values must match'
+    });
+  }
+
+  const updated = {}
+  const updateableFields = ['intensity', 'water', 'triggers', 'journal'];
+    updateableFields.forEach(field => {
+      if (field in req.body) {
+        updated[field] = req.body[field];
+      }
+    });
+
+  Migraine.findByIdAndUpdate(req.params['id']).exec()
+    .then(migraine => {
+      res.status(200).json({message:'Updated journal post!!'}).end()
+    })
+    .catch(message => {
+      res.status(500).json({ error: true, message }).end()
+    })
 })
 
-router.delete('/:migraine-id', (req, res) => {
-  res.send('TODO: implement migraine destruction')
+
+
+router.delete('/:id', (req, res) => {
+  Migraine.findByIdAndRemove(req.params['id']).exec()
+    .then(migraine => {
+      // if this function executes, Migraine found a valid migraine entry with
+      // that _id.
+      // need to delete and throw message that _id was successfully
+      // deleted
+      res.status(204).json({message:'Migraine was successfully deleted!'}).end()
+    })
+    .catch(message => {
+      //if this function executes, Migraine didn't find and throw an error
+      res.status(404).json({ error: true, message }).end()
+    })
 })
 
 module.exports = router
