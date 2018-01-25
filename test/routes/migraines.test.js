@@ -1,9 +1,3 @@
-// tests for the migraines router
-// - [ ] Creating a route
-// - [ ] Updating a route
-// - [ ] Deleting a route
-// - [ ] Querying routes
-
 const chai = require('chai')
 
 chai.use(require('chai-http'))
@@ -12,8 +6,6 @@ const expect = chai.expect
 const Migraine = require('../../back-end/models/Migraine')
 
 const { app, runServer, closeServer } = require('../../back-end/server')
-
-// ./node_modules/.bin/mocha ./test/routes/migraines.test.js
 
 describe('Migraines router', () => {
   before(runServer)

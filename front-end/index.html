@@ -74,9 +74,9 @@
             <form>
               <div class="row">
                 <div class="input-group">
-                  <input id="search-city" type="text" class="form-control input-lg" placeholder="Search for another location...">
+                  <input id="searchCity" type="text" class="form-control input-lg" placeholder="Search for another location...>
                   <span class="input-group-btn">
-                    <button class="btn btn-default btn-lg go-btn" type="button">Go!</button>
+                    <button class="btn btn-default btn-lg go-btn" id="searchBtn" type="button">Go!</button>
                   </span>
                 </div> <!-- /input-group -->
               </div> <!--/row -->
@@ -114,95 +114,53 @@
 
 <section class="section row-three container-fluid">
   <div class="well">
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <h2>Log a Migraine</h2>
-        <div class="well">
-          <h3>Current level of pain: <span id="migraine-level"></span></h3></br>
+    <form class="newEntryForm">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h2>Log a Migraine</h2>
+          <div class="well">
+            <h3>Current level of pain: <span id="migraine-level"></span></h3></br>
             <div id="slider"></div>
-            <!--
-            <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-link btn-md">1</a>
-              <a href="#" class="btn btn-link btn-md">2</a>
-              <a href="#" class="btn btn-link btn-md">3</a>
-              <a href="#" class="btn btn-link btn-md">4</a>
-              <a href="#" class="btn btn-link btn-md">5</a>
-              <a href="#" class="btn btn-link btn-md">6</a>
-              <a href="#" class="btn btn-link btn-md">7</a>
-              <a href="#" class="btn btn-link btn-md">8</a>
-              <a href="#" class="btn btn-link btn-md">9</a>
-              <a href="#" class="btn btn-link btn-md">10</a>
-            </div>
-            -->
-          <!--/.btn-group btn-group-justified-->
-        </div><!--/.well-->
-      </div> <!--col-sm-12 text-center-->
-    </div><!--row-->
-<!--row 4-->
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="list-group">
-          <h4>Other known triggers</h4>
-
-          <p>
-            <input type="checkbox" name="triggers[]" id="trigger-stress">
-            <label for="trigger-stress">Stress</label>
-          </p>
-          <p>
-            <input type="checkbox" name="triggers[]" id="trigger-sleep">
-            <label for="trigger-sleep">Change in sleeping habits</label>
-          </p>
-          <p>
-            <input type="checkbox" name="triggers[]" id="trigger-hormones">
-            <label for="trigger-hormones">Hormones</label>
-          </p>
-          <p>
-            <input type="checkbox" name="triggers[]" id="trigger-food">
-            <label for="trigger-food">Food triggers</label>
-          </p>
-          <p>
-            <input type="checkbox" name="triggers[]" id="trigger-alcohol">
-            <label for="trigger-alcohol">Alcohol</label>
-          </p>
-          <p>
-            <input type="checkbox" name="triggers[]" id="trigger-physical">
-            <label for="trigger-physical">Physical activity</label>
-          </p>
-        </div><!--/.list-group-->
-      </div><!--/.col-sm-3-->
-      <div class="col-sm-3">
-        <div class="list-group">
-          <h4>Glasses of water today?</h4>
-          <p>
-            <input type="radio" id="glasses-of-water" value="0">
-            <label for="glasses-of-water">0</label>
-          </p>
-          <p>
-            <input type="radio" id="glasses-of-water" value="1-2">
-            <label for="glasses-of-water">1-2</label>
-          </p>
-          <p>
-            <input type="radio" id="glasses-of-water" value="3-5">
-            <label for="glasses-of-water">3-5</label>
-          </p>
-          <p>
-            <input type="radio" id="glasses-of-water" value="6-7">
-            <label for="glasses-of-water">6-7</label>
-          </p>
-          <p>
-            <input type="radio" id="glasses-of-water" value="8">
-            <label for="glasses-of-water">8+</label>
-          </p>
-        </div><!--/.list-group-->
-      </div><!--/.col-sm-3-->
-      <div class="col-sm-6">
-        <h4 class="text-center"> Journal</h4>
-        <div class="well">
-          <textarea class="form-control" rows="4" placeholder="Anything else to note?"></textarea>
-        </div> <!--well-->
-        <button type="button" class="btn btn-default btn-lg btn-block active">Submit entry</button>
-      </div> <!--col-sm-6-->
-    </div> <!--./row-->
+          </div><!--/.well-->
+        </div> <!--col-sm-12 text-center-->
+      </div><!--row-->
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="list-group">
+            <h4>Other known triggers</h4><br>
+            <section id="triggers">
+              <input type="checkbox" name="triggers[]" id="trigger-stress" value="stress">Stress<br>
+              <input type="checkbox" name="triggers[]" id="trigger-sleep" value="sleep">Sleep<br>
+              <input type="checkbox" name="triggers[]" id="trigger-hormones" value="hormoness">Hormones<br>
+              <input type="checkbox" name="triggers[]" id="trigger-food" value="food">Food<br>
+              <input type="checkbox" name="triggers[]" id="trigger-alcohol" value="alcohol">Alcohol<br>
+              <input type="checkbox" name="triggers[]" id="trigger-exercise" value="exercise">Exercise
+            </section>
+          </div><!--/.list-group-->
+        </div><!--/.col-sm-3-->
+        <div class="col-sm-3">
+          <div class="list-group">
+            <h4>Glasses of water today?</h4>
+            <section id="water">
+              <input type="radio" name="glasses-of-water" value="1"> 1<br>
+              <input type="radio" name="glasses-of-water" value="2"> 2<br>
+              <input type="radio" name="glasses-of-water" value="3"> 3<br>
+              <input type="radio" name="glasses-of-water" value="4"> 4<br>
+              <input type="radio" name="glasses-of-water" value="5"> 5<br>
+              <input type="radio" name="glasses-of-water" value="6"> 6<br>
+              <input type="radio" name="glasses-of-water" value="7"> 7+<br>
+            </section>
+          </div><!--/.list-group-->
+        </div><!--/.col-sm-3-->
+        <div class="col-sm-6">
+          <h4 class="text-center"> Journal</h4>
+          <div class="well">
+            <textarea class="form-control" rows="4" id="journal" placeholder="Anything else to note?"></textarea>
+          </div> <!--well-->
+          <button type="button" id="entryBtn" class="btn btn-default btn-lg btn-block active">Submit entry</button>
+        </div> <!--col-sm-6-->
+      </div> <!--./row-->
+    </form>
   </div><!--/.well-->
 </section><!--row-three-->
 

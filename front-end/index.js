@@ -1,60 +1,50 @@
+var city = "Kansas City"
+var intensity
+var water
+var glassesOfWater
 
-owm.getWeather({
-  city: 'Kansas City'
+owm.getWeather({city: city})
+
+owm.getForecast({city:city})
+
+$('#searchBtn').click(function () {
+  city = $('#searchCity').val()
+  console.log(city);
+  $('#city').html(city);
+  owm.getWeather({city: city})
+  owm.getForecast({city: city})
 })
-  .catch(err => {
-    console.error('Something went wrong while requesting weather data:', error);
-  })
-  .then(payload => {
-    console.log(payload);
-    $('#temperature').html(payload.main.temp + '°F');
-    $('#weather-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.weather[0].icon + '.png">');
-    $('#pressure').html(payload.main.pressure);
-    $('#humidity').html(payload.main.humidity + '%');
-  })
 
-owm.getForecast({
-  city: 'Kansas City'
+$(function() {
+  $('#slider').slider({
+    value:5,
+    min: 0,
+    max: 10,
+    step: 1,
+    slide: function(ev, ui) {
+      $( '#migraine-level' ).html( ui.value );
+      console.log(ui.value);
+      intensity = ui.value
+    }
+  });
+});
+
+function getRadioCheckedValue(water) {
+  water = document.forms[0].elements[water];
+  for(var i =0; i < water.length; i++) {
+    if (water[i].checked) {
+      console.log (water[i].value);
+      glassesOfWater = water[i].value
+    }
+  } return'';
+}
+
+$('#entryBtn').click(function() {
+  var triggers = $('input[type = checkbox]' ).html;
+  var water = $('input[name=glasses-of-water]:checked' ).val();
+  var journal = $( '#journal' ).val();
+  console.log( intensity, water, journal )
 })
-  .catch(err=> {
-    console.error('Something went wrong while requesting weather forecast', error);
-  })
-  .then(payload => {
-    console.log(payload);
-    $('#day1').html(payload.list["0"].dt_txt);
-    $('#day1-temp').html(payload.list["0"].main.temp + '°');
-    $('#day1-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["0"].weather["0"].icon + '.png">');
-    $('#day2').html(payload.list["8"].dt_txt);
-    $('#day2-temp').html(payload.list["8"].main.temp + '°');
-    $('#day2-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["8"].weather["0"].icon + '.png">');
-    $('#day3').html(payload.list["16"].dt_txt);
-    $('#day3-temp').html(payload.list["16"].main.temp + '°');
-    $('#day3-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["16"].weather["0"].icon + '.png">');
-    $('#day4').html(payload.list["24"].dt_txt);
-    $('#day4-temp').html(payload.list["24"].main.temp + '°');
-    $('#day4-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["24"].weather["0"].icon + '.png">');
-    $('#day5').html(payload.list["32"].dt_txt);
-    $('#day5-temp').html(payload.list["32"].main.temp + '°');
-    $('#day5-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["32"].weather["0"].icon + '.png">');
-  })
-
-
-  $( function() {
-    $('#slider').slider({
-      value:5,
-      min: 0,
-      max: 10,
-      step: 1,
-      slide: function(ev, ui) {
-        // console.log('Value changed:', arguments);
-        $( '#migraine-level' ).html( ui.value );
-      }
-    });
-    //$( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
-  } );
-
-
-
 
 
 var ctx = document.getElementById("myLineChart");
