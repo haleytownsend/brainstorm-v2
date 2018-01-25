@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
       journal: req.body.journal
     }))
     .then(migraine => res.status(201).json(migraine).end())
-    .catch(message => res.status(400).json({ error: true, message }).end())
+    .catch(message => res.status(400).json({ error: true, message }).end()
 })
 
 router.get('/:id', (req, res) => {
