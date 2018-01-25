@@ -9,21 +9,21 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  try {
-    ['intensity', 'water'].forEach(field => {
+  Promise.resolve()
+    .then(() => ['intensity', 'water'].forEach(field => {
       if (!(field in req.body)) {
-        throw `\`${field}\` is not in request body`
-        res.status(400).json({ error: true, message })
+        throw new Error(`\`${field}\` is not in request body`)
       }
-    var migraine = Migraine.create({req.body.intensity, req.body.water, req.body.triggers, req.body.journal});
-    res.status(201).end()
-    })
-  }
-  catch (err) {
-    res.status(400).json(err).end()
-  }
+    }))
+    .then(() => Migraine.create({
+      intensity: req.body.intensity,
+      water: req.body.water,
+      triggers: req.body.triggers,
+      journal: req.body.journal
+    }))
+    .then(migraine => res.status(201).json(migraine).end())
+    .catch(message => res.status(400).json({ error: true, message }).end())
 })
-
 
 router.get('/:id', (req, res) => {
   Migraine.findById(req.params['id']).exec()
@@ -35,42 +35,18 @@ router.get('/:id', (req, res) => {
     })
 })
 
-
 router.put('/:id', (req, res) => {
-  Migraine.findByIdAndUpdate(req.params.id, (err, migraine) => {
-    if (err) {
-      res.status(500).json({ error: true, message }).end()
-    } else {
-        migraine.intensity = req.body.intensity || migraine.intensity;
-        migraine.water = req.body.water ||  migraine.water;
-        migraine.triggers = req.body.triggers || migraine.triggers;
-        migraine.journal = req.body.journal || migraine.journal;
-
-        migraine.save((err, migraine) => {
-          if (err) {
-            res.status(500).json({ error: true, message }).end()
-          }
-          res.status(200).json({message:'Updated journal post!!'}).end()
-        })
-      }
-    })
-  })
-
-
+  return Promise.resolve()
+    .then(() => Migraine.validate(req.body))
+    .then(() => Migraine.findByIdAndUpdate(req.body.id, req.body))
+    .then(migraine => res.status(200).json(migraine).end())
+    .catch(message => res.status(500).json({ error: true, message }).end())
+})
 
 router.delete('/:id', (req, res) => {
-  Migraine.findByIdAndRemove(req.params['id']).exec()
-    .then(migraine => {
-      // if this function executes, Migraine found a valid migraine entry with
-      // that _id.
-      // need to delete and throw message that _id was successfully
-      // deleted
-      res.status(204).json({message:'Migraine was successfully deleted!'}).end()
-    })
-    .catch(message => {
-      //if this function executes, Migraine didn't find and throw an error
-      res.status(404).json({ error: true, message }).end()
-    })
+  Migraine.findByIdAndRemove(req.params.id).exec()
+    .then(migraine => res.status(204).end())
+    .catch(message => res.status(404).json({ error: true, message }).end())
 })
 
 module.exports = router
