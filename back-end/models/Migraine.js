@@ -5,7 +5,11 @@ const schema = new mongoose.Schema({
   intensity: { type: Number, required: true },
   water: { type: Number, required: true },
   triggers: [ String ],
-  journal: String
+  journal: String,
+  pressure: { type: Number, required: true },
+  tempMin: { type: Number, required: true },
+  tempMax: { type: Number, required: true },
+  weatherMain: String
 })
 
 schema.methods.apiRepr = function () {

@@ -21,6 +21,11 @@ owm.getWeather = function (options) {
     $('#weather-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.weather[0].icon + '.png">');
     $('#pressure').html(payload.main.pressure);
     $('#humidity').html(payload.main.humidity + '%');
+    pressure = payload.main.pressure;
+    tempMin = payload.main.temp_min;
+    tempMax = payload.main.temp_max;
+    weatherMain = payload.weather[0].main;
+    console.log(pressure, tempMax, tempMin, weatherMain)
   })
 }
 
@@ -51,6 +56,6 @@ owm.getForecast = function (options) {
     $('#day4-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["24"].weather["0"].icon + '.png">');
     $('#day5').html(payload.list["32"].dt_txt);
     $('#day5-temp').html(payload.list["32"].main.temp + '°');
-    $('#day5-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["32"].weather["0"].icon + '.png">');
+    $('#day5-icon').html('<img src="http://openweathermap.org/img/w/'+ payload.list["32"].weather["0"].icon + '.png">')
   })
 }
