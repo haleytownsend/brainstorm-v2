@@ -73,16 +73,14 @@ $('#correlationBtn').click(function correlation() {
   var dataSet;
   $.get('/migraines', function( data ) {  })
     .then(jqXHR => {
-      var arr = {
+      var obj = {
         "date":[jqXHR[0].createdAt],
         "intensity":[jqXHR[0].intensity],
-        "water":[jqXHR[0].water],
-        "pressure":[jqXHR[0].pressure],
-        "weatherMain":[jqXHR[0].weatherMain]
+        "pressure":[jqXHR[0].pressure]
       };
       arr.forEach(function(elementl) {
         console.log(element)
-        console.log(arr)
+        console.log(obj)
       })
     })
 
