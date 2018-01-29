@@ -19,7 +19,11 @@ router.post('/', (req, res) => {
       intensity: req.body.intensity,
       water: req.body.water,
       triggers: req.body.triggers,
-      journal: req.body.journal
+      journal: req.body.journal,
+      pressure: req.body.pressure,
+      tempMax: req.body.tempMax,
+      tempMin: req.body.tempMin,
+      weatherMain: req.body.weatherMain
     }))
     .then(migraine => res.status(201).json(migraine).end())
     .catch(message => res.status(400).json({ error: true, message }).end())

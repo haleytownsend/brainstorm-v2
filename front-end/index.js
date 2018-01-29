@@ -37,6 +37,11 @@ $('#entryBtn').click(function() {
   var inputs = [ intensity, triggers, water, journal, pressure, tempMax, tempMin, weatherMain]
   console.log(inputs)
 
+  if (!triggers.length || !water || !journal) {
+    alert('ERROR: Be sure you have selected the Current Level of Pain and Your Glasses of Water selection')
+    return
+  }
+
   jQuery.ajax({
     type: 'POST',
     url: '/migraines',
@@ -60,79 +65,92 @@ $('#entryBtn').click(function() {
     })
     .catch(error => {
       console.error('ERROR:', error)
-      alert('ERROR: Be sure you have selected the Current Level of Pain and Your Glasses of Water selection')
+      alert('Something went wrong while contacting Brainstorm servers')
     })
 })
 
 $('#correlationBtn').click(function correlation() {
+  var dataSet;
   $.get('/migraines', function( data ) {  })
     .then(jqXHR => {
+      var arr = {
+        "date":[jqXHR[0].createdAt],
+        "intensity":[jqXHR[0].intensity],
+        "water":[jqXHR[0].water],
+        "pressure":[jqXHR[0].pressure],
+        "weatherMain":[jqXHR[0].weatherMain]
+      };
+      arr.forEach(function(elementl) {
+        console.log(element)
+        console.log(arr)
+      })
+    })
 
-      console.log(jqXHR)
-      // var intensityData = jqXHR [0].intensity;
+      // var intensity = []
+      // var intensityData = [jqXHR [0].intensity];
       // var journalData = jqXHR [0].journal;
       // var triggerData = jqXHR [0].triggers;
       // var waterData = jqXHR [0].water;
-      // //const weatherData = jqXHR [0].intensity
       //
       // const data = [ intensityData, journalData, triggerData, waterData ]
       // console.log (data);
 
-      var intensityDatabase = [];
-      var triggerDatabase= [];
-      var waterDatabase = [];
-      var journalDatabase = [];
-      var pressureDatabase = [];
-      var tempMaxDatabase = [];
-      var tempMinDatabase = [];
-      var weatherMainDatabase = [];
-      for (i = 0; i <jqXHR[i].length; i++)  {
-        intensityDatabase.push(jqXHR[i].intensity),
-        triggerDatabase.push(jqXHR[i].triggers),
-        waterDatabase.push(jqXHR[i].water),
-        journalDatabase.push(jqXHR[i].journal),
-        pressureDatabase.push(jqXHR[i].pressure),
-        tempMinDatabase.push(jqXHR[i].tempMin),
-        tempMaxDatabase.push(jqXHR[i].tempMax),
-        weatherMainDatabase.push(jqXHR[i].weatherMain)
-      };
-  console.log(intensityDatabase, waterDatabase, weatherMainDatabase)
+      // var allData = {
+      //   "date": [jqXHR[0].dt],
+      //   "intensity": [jqXHR [0].intensity],
+      //   "journal": [jqXHR [0].journal],
+      //   "trigger": [jqXHR [0].triggers],
+      // }
+      //
+      // console.log(allData)
+
 var ctx = document.getElementById("myLineChart");
 var myLineChart = new Chart(ctx, {
 type: 'line',
 data: {
-    labels:["Clear", "Clouds", "Rain", "Snow", "Storms"],
-    datasets: [{
-      label: '# of migraines',
-      data: [,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1
-    }]
+    labels:["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [
+      {
+        label: 'Intensity',
+        data: [1, 3, 1, 4],
+        backgroundColor: ['rgba(0, 99, 132, 0.2)'],
+        borderColor: ['rgba(0,99,132,1)'],
+        borderWidth: 1,
+        fill: false,
+        yAxisID: 'y-axis-1'
+      },
+      {
+        label: '# of migraines',
+        data: [2, 3, 4, 3, 2, 1, 5],
+        backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+        borderColor: ['rgba(255,99,132,1)'],
+        borderWidth: 1,
+        fill: false,
+        yAxisID: 'y-axis-2'
+      }
+    ],
 },
 options: {
     scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero:true
-            }
-        }]
+        yAxes: [
+          {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            id: 'y-axis-1',
+            ticks: { beginAtZero:true }
+          },
+          {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            id: 'y-axis-2',
+            ticks: { beginAtZero:true }
+          }
+        ]
     }
   }
 });
-})
+
+
 })
