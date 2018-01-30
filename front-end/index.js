@@ -70,85 +70,56 @@ $('#entryBtn').click(function() {
 })
 
 $('#correlationBtn').click(function correlation() {
-  var dataSet;
+
   $.get('/migraines', function( data ) {  })
     .then(jqXHR => {
-      var obj = {
-        "date":[jqXHR[0].createdAt],
-        "intensity":[jqXHR[0].intensity],
-        "pressure":[jqXHR[0].pressure]
-      };
-      arr.forEach(function(elementl) {
-        console.log(element)
-        console.log(obj)
-      })
-    })
 
-      // var intensity = []
-      // var intensityData = [jqXHR [0].intensity];
-      // var journalData = jqXHR [0].journal;
-      // var triggerData = jqXHR [0].triggers;
-      // var waterData = jqXHR [0].water;
-      //
-      // const data = [ intensityData, journalData, triggerData, waterData ]
-      // console.log (data);
-
-      // var allData = {
-      //   "date": [jqXHR[0].dt],
-      //   "intensity": [jqXHR [0].intensity],
-      //   "journal": [jqXHR [0].journal],
-      //   "trigger": [jqXHR [0].triggers],
-      // }
-      //
-      // console.log(allData)
-
-var ctx = document.getElementById("myLineChart");
-var myLineChart = new Chart(ctx, {
-type: 'line',
-data: {
-    labels:["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    datasets: [
-      {
-        label: 'Intensity',
-        data: [1, 3, 1, 4],
-        backgroundColor: ['rgba(0, 99, 132, 0.2)'],
-        borderColor: ['rgba(0,99,132,1)'],
-        borderWidth: 1,
-        fill: false,
-        yAxisID: 'y-axis-1'
-      },
-      {
-        label: '# of migraines',
-        data: [2, 3, 4, 3, 2, 1, 5],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-        borderColor: ['rgba(255,99,132,1)'],
-        borderWidth: 1,
-        fill: false,
-        yAxisID: 'y-axis-2'
-      }
-    ],
-},
-options: {
-    scales: {
-        yAxes: [
+    var ctx = document.getElementById("myLineChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels:["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        datasets: [
           {
-            type: 'linear',
-            display: true,
-            position: 'left',
-            id: 'y-axis-1',
-            ticks: { beginAtZero:true }
+            label: 'Intensity',
+            data: [3, 2, 5, 1],
+            backgroundColor: ['rgba(0, 99, 132, 0.2)'],
+            borderColor: ['rgba(0,99,132,1)'],
+            borderWidth: 1,
+            fill: false,
+            yAxisID: 'y-axis-1'
           },
           {
-            type: 'linear',
-            display: true,
-            position: 'left',
-            id: 'y-axis-2',
-            ticks: { beginAtZero:true }
+            label: '# of migraines',
+            data: [2, 3, 4, 3, 2, 1, 5],
+            backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+            borderColor: ['rgba(255,99,132,1)'],
+            borderWidth: 1,
+            fill: false,
+            yAxisID: 'y-axis-2'
           }
-        ]
-    }
-  }
-});
-
-
+        ],
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              id: 'y-axis-1',
+              ticks: { beginAtZero:true }
+            },
+            {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              id: 'y-axis-2',
+              ticks: { beginAtZero:true }
+            }
+          ]
+        }
+      }
+    });
+  })
 })
