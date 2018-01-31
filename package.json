@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node back-end/server.js",
     "serve": "nodemon back-end/server.js",
-    "test": "mocha --recursive"
+    "test": "1"
   },
   "dependencies": {
     "body-parser": "^1.18.2",

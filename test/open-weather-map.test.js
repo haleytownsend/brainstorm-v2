@@ -1,6 +1,6 @@
 const chai = require('chai');
-const { app, closeServer } = require('../src/server');
-const requestWeather = require('../src/open-weather-map')
+const { app, closeServer } = require('../back-end/server');
+const requestWeather = require('../back-end/open-weather-map')
 
 chai.use(require('chai-http'));
 chai.should();
