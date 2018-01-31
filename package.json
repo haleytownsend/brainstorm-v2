@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node back-end/server.js",
     "serve": "nodemon back-end/server.js",
-    "test": "1"
+    "test": "./node_modules/.bin/mocha ./test/routes/migraines.test.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
