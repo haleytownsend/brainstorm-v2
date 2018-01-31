@@ -71,55 +71,58 @@ $('#entryBtn').click(function() {
 
 $('#correlationBtn').click(function correlation() {
 
-  $.get('/migraines', function( data ) {  })
+  $.get('/migraines')
     .then(jqXHR => {
+      console.log(jqXHR)
+      const dates = jqXHR.map(migraine => migraine.createdAt.slice(6,10))
+      const intensities = jqXHR.map(migraine => migraine.intensity)
+      const pressures = jqXHR.map(migraine => migraine.pressure)
 
-    var ctx = document.getElementById("myLineChart");
-    var myLineChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels:["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        datasets: [
-          {
-            label: 'Intensity',
-            data: [3, 2, 5, 1],
-            backgroundColor: ['rgba(0, 99, 132, 0.2)'],
-            borderColor: ['rgba(0,99,132,1)'],
-            borderWidth: 1,
-            fill: false,
-            yAxisID: 'y-axis-1'
-          },
-          {
-            label: '# of migraines',
-            data: [2, 3, 4, 3, 2, 1, 5],
-            backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-            borderColor: ['rgba(255,99,132,1)'],
-            borderWidth: 1,
-            fill: false,
-            yAxisID: 'y-axis-2'
-          }
-        ],
-      },
-      options: {
-        scales: {
-          yAxes: [
+      var ctx = document.getElementById("myLineChart");
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dates,
+          datasets: [
             {
-              type: 'linear',
-              display: true,
-              position: 'left',
-              id: 'y-axis-1',
-              ticks: { beginAtZero:true }
+              label: 'Intensity',
+              data: intensities,
+              backgroundColor: ['rgba(0, 99, 132, 0.2)'],
+              borderColor: ['rgba(0,99,132,1)'],
+              borderWidth: 1,
+              fill: false,
+              yAxisID: 'y-axis-1'
             },
             {
-              type: 'linear',
-              display: true,
-              position: 'left',
-              id: 'y-axis-2',
-              ticks: { beginAtZero:true }
+              label: 'Pressure',
+              data: pressures,
+              backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+              borderColor: ['rgba(255,99,132,1)'],
+              borderWidth: 1,
+              fill: false,
+              yAxisID: 'y-axis-2'
             }
-          ]
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                id: 'y-axis-1',
+                ticks: { beginAtZero:true }
+              },
+              {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                id: 'y-axis-2',
+              }
+            ]
+          }
         }
-      }
-    });
-  })
+      });
+    })
 })
