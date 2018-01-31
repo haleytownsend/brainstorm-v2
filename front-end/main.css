@@ -1,21 +1,68 @@
-
-.row {
-  background-color: #2ec4b6;
-  height: auto
+body {
+  padding: 50px
 }
 
-.row-one{
-  background-color: #ffffff
+.row-one {
+  background-color: white;
+  height: auto;
+  padding-top: 20px;
+  border: 2px solid #f49e89
 }
 
-.well{
-  background-color: #f2f2f2;
-  height: auto
+.row-two {
+  background-color: #37abb4;
+  padding-top: 10px;
+  border: 2px solid #7ed2bb
 }
 
+.row-three {
+  background-color: #f49e89;
+  padding-top: 10px;
+  border: 2px solid #dddddd;
+  padding-bottom: 10px
+}
 .row-four {
-  background-color: #011627;
-  height: auto
+  background-color: #7ed2bb;
+  height: auto;
+  border: 2px solid #37abb4;
+  padding-top: 10px;
+  padding-bottom: 20px
+}
+
+.painScale {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  border: 2px solid #37abb4
+}
+
+.search-container {
+  width: 75%;
+  margin: auto
+}
+
+#searchCity {
+  font-size: 12px
+}
+
+#entryBtn {
+  background-color: white;
+  margin-bottom: 20px
+}
+
+#slider {
+  background-color: #eeeeee;
+}
+
+#myLineChart {
+  background-color: #bee8dd;
+  width: 85%;
+  height: auto;
+}
+
+#correlationBtn {
+  margin-bottom: 25px;
+  background-color: #bee8dd
 }
 
 h1, h3, p {
