@@ -1,16 +1,5 @@
 # The Brain Storm
 
-## Tasks
+An interactive, single page app used to track migraine symptoms and local weather. A line chart shows the correlation between the barometric pressure and the level of pain for each migraine entry.
 
-**Back-end**
-
-- [ ] Plan and create tasks
-
-**Front-end**
-
-- [x] Layout
-- [x] Static mockup
-- [ ] Open Weather API client
-  - [ ] Get weather data for a city
-  - [ ] Get forecast data for a city
-- [ ] Use the OWA client to show weather and forecast data instead of statics
+Technologies used: HTML, CSS, Bootstrap, JavaScript, jQuery, Node.js, Express, Git, GitHub, Travis CI, Heroku, Chart.js, Mongoose, MongoDB, Mocha, Chai
