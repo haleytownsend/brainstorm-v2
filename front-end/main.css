@@ -61,6 +61,7 @@ body {
 }
 
 #correlationBtn {
+  margin-top: 25px;
   margin-bottom: 25px;
   background-color: #bee8dd
 }
@@ -71,4 +72,12 @@ h1, h3, p {
 
 textarea {
   padding: 10px;
+}
+
+.correlationInfo {
+  font-size: 15px;
+  border: 2px solid #37abb4;
+  padding: 15px;
+  align: center;
+  background-color: #bee8dd
 }
