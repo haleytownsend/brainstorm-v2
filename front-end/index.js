@@ -6,7 +6,7 @@ owm.getWeather({city: city})
 owm.getForecast({city:city})
 
 $('#searchBtn').click(function () {
-  city = $('#searchCity').val()
+  var city = $('#searchCity').val
   console.log(city);
   $('#city').html(city);
   owm.getWeather({city: city})
