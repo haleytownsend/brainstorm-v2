@@ -5,7 +5,8 @@ owm.getWeather({city: city})
 
 owm.getForecast({city:city})
 
-$('#searchBtn').click(function () {
+$('#city-form').submit(function (ev) {
+  ev.preventDefault();
   city = $('#searchCity').val()
   console.log(city);
   $('#city').html(city);
